@@ -1,0 +1,18 @@
+
+<div class="contenedor mt-4 mb-4">
+
+    <p class="h1 text-center mb-4 text-uppercase">El juego de la vida</p>
+    
+    <div class="panel">
+        <div *ngFor="let fila of panel; let i = index" class="fila">
+            <app-celda *ngFor="let columna of fila; let j = index" [valorCelda]="columna" (click)="cambiarEstado(i, j)" class="celda">&nbsp;</app-celda>
+            <br>
+        </div>
+
+    </div>
+
+    <div class="botonera">
+        <button (click)="nextTurn()" class="btn btn-primary">Siguiente turno</button>
+        <button (click)="runGame()" class="btn btn-info">{{ play ? 'Stop' : 'Play' }}</button>
+    </div>
+</div>
