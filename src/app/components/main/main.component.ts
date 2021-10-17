@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { interval, Observable, Subscription } from "rxjs";
 import { MainService } from "src/app/services/main.services";
 
-
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
@@ -11,8 +10,9 @@ import { MainService } from "src/app/services/main.services";
 export class MainComponent implements OnInit{
 
     panel: Array<Array<number>> = [];
+    velocidad: string = '1000';
     play: boolean = false;
-    count$: Observable<number> = interval(1000);
+    count$: Observable<number> = interval(Number(this.velocidad));
     countSource: Subscription | null = null;
 
     constructor(private mainService: MainService) {}
@@ -54,6 +54,15 @@ export class MainComponent implements OnInit{
         }
 
 
+    }
+
+    changeVel() {
+        
+        this.countSource?.unsubscribe();
+        this.count$ = interval(Number(this.velocidad));
+        this.countSource = this.count$.subscribe(val => {
+            this.nextTurn();
+        });
     }
 
 
