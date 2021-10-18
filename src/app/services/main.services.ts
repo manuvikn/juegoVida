@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
 
 @Injectable({
@@ -8,8 +9,8 @@ export class MainService {
 
     panel: Array<Array<number>> = [];
     panelAux: Array<Array<number>> = [];
-    filas: number = 30;
-    columnas: number = 70;
+    filas: number = 50;
+    columnas: number = 160;
 
     constructor() {}
 

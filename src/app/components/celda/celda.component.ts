@@ -5,10 +5,10 @@ import { Component, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
   templateUrl: './celda.component.html',
   styleUrls: ['./celda.component.css']
 })
-export class CeldaComponent implements OnInit {
+export class CeldaComponent implements OnInit{
 
   @Input('valorCelda') valorCelda: number = 0;
-
+  
   constructor(private element: ElementRef,
       private render: Renderer2) { }
 
@@ -19,7 +19,6 @@ export class CeldaComponent implements OnInit {
     } else {
       this.render.setStyle(this.element.nativeElement, 'background-color', 'black');
     }
-    
   }
-
+  
 }
