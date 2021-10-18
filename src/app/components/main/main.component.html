@@ -4,7 +4,7 @@
 
     <div class="panel">
         <div *ngFor="let fila of panel; let i = index" class="fila">
-            <app-celda *ngFor="let columna of fila; let j = index" [valorCelda]="columna" (click)="cambiarEstado(i, j)" class="celda">&nbsp;</app-celda>
+            <app-celda *ngFor="let columna of fila; let j = index" [valorCelda]="columna" (click)="cambiarEstado(i, j)" class="celda" [ngClass]="{'conBorde': displayCuadricula}">&nbsp;</app-celda>
 
         </div>
 
@@ -13,6 +13,10 @@
     <div class="botonera">
         <button (click)="nextTurn()" class="btn btn-primary">Siguiente turno</button>
         <button (click)="runGame()" class="btn btn-info">{{ play ? 'Stop' : 'Play' }}</button>
+        <button (click)="changeCuadricula()" class="btn btn-secondary">Cuadrícula <i class="bi bi-box"></i>&nbsp;
+            <i *ngIf="displayCuadricula" class="bi bi-check-circle-fill"></i>
+            <i *ngIf="!displayCuadricula" class="bi bi-check-circle"></i>
+        </button>
     </div>
     <div class="form-group">
         <legend class="mt-4">Velocidad</legend>

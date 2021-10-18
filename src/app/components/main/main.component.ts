@@ -7,11 +7,12 @@ import { MainService } from "src/app/services/main.services";
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit {
 
     panel: Array<Array<number>> = [];
     velocidad: string = '1000';
     play: boolean = false;
+    displayCuadricula: boolean = false;
     count$: Observable<number> = interval(Number(this.velocidad));
     countSource: Subscription | null = null;
 
@@ -63,6 +64,10 @@ export class MainComponent implements OnInit{
         this.countSource = this.count$.subscribe(val => {
             this.nextTurn();
         });
+    }
+
+    changeCuadricula() {
+        this.displayCuadricula = !this.displayCuadricula;
     }
 
 

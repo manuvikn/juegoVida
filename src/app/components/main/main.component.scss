@@ -33,4 +33,11 @@
         justify-content: center;
         gap: 10px;
     }
+
+    .conBorde {
+        border-width: thin;
+        border-style: solid;
+        border-color: darkgray
+        // border: 0.1px solid white;
+    }
 }
