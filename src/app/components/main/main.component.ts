@@ -11,6 +11,7 @@ export class MainComponent implements OnInit {
 
     panel: Array<Array<number>> = [];
     velocidad: string = '1000';
+    generacion: number = 0;
     play: boolean = false;
     displayCuadricula: boolean = false;
     count$: Observable<number> = interval(Number(this.velocidad));
@@ -27,6 +28,7 @@ export class MainComponent implements OnInit {
     async nextTurn() {
         
         this.panel = await this.mainService.nextTurn();
+        this.generacion = this.generacion + 1;
     
     }
 

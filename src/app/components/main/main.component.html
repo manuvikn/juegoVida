@@ -10,6 +10,10 @@
 
     </div>
 
+    <div class="mt-2">
+        <p class="text-end">Generación: {{generacion}}</p>
+    </div>
+
     <div class="botonera">
         <button (click)="nextTurn()" class="btn btn-primary">Siguiente turno</button>
         <button (click)="runGame()" class="btn btn-info">{{ play ? 'Stop' : 'Play' }}</button>
