@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { UtilsVariante } from "../utils/utils-variante";
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class MainService {
+export class MainService1 {
 
     panel: Array<Array<number>> = [];
     panelAux: Array<Array<number>> = [];
@@ -108,17 +107,13 @@ export class MainService {
 
         }
 
-/*         if ( this.panel[fila][columna] === 0 && celdasVecinas === 3) {
+        if ( this.panel[fila][columna] === 0 && celdasVecinas === 3) {
             return 1;
         } else if ( this.panel[fila][columna] === 1 && ( celdasVecinas === 2 || celdasVecinas === 3 ) ) {
             return 1;
         } else {
             return 0;
         }
- */
-        const utilsVariante = new UtilsVariante('23/3', this.panel[fila][columna], celdasVecinas);
-
-        return Number(utilsVariante.determinarVida());
 
     }
  

@@ -1,76 +1,52 @@
-import { Component, OnInit } from "@angular/core";
-import { interval, Observable, Subscription } from "rxjs";
-import { MainService } from "src/app/services/main.services";
+import { Component, ComponentFactoryResolver, ComponentRef, ViewChild, ViewContainerRef } from "@angular/core";
+import { PartidaComponent } from "../partida/partida.component";
 
 @Component({
     selector: 'app-main',
     templateUrl: './main.component.html',
     styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
 
-    panel: Array<Array<number>> = [];
-    velocidad: string = '1000';
-    generacion: number = 0;
-    play: boolean = false;
-    displayCuadricula: boolean = false;
-    count$: Observable<number> = interval(Number(this.velocidad));
-    countSource: Subscription | null = null;
+    @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | null = null;
+    components: Array<ComponentRef<PartidaComponent>> = [];
+    partidaComponent: PartidaComponent | null = null;
+    childKey: number = 0;
 
-    constructor(private mainService: MainService) {}
+    constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
-    ngOnInit() {
-
-        this.panel = this.mainService.generarPanel();
+    addComponent() {
+        if (this.container) {
+            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(PartidaComponent);
+            const component = this.container.createComponent(componentFactory);
         
+            let partida = component.instance;
+            partida.key = this.childKey;
+            this.childKey = this.childKey + 1;
+            partida.parentRef = this;
+
+            this.components.push(component);
+        }
     }
     
-    async nextTurn() {
-        
-        this.panel = await this.mainService.nextTurn();
-        this.generacion = this.generacion + 1;
-    
-    }
-
-    cambiarEstado(fila: number, columna: number) {
-        
-        this.panel[fila][columna] = Number(!Boolean(this.panel[fila][columna]));
-        
-    }
-
-    runGame() {
-
-        this.play = !this.play;
-
-        if (this.play) {
-
-            this.countSource = this.count$.subscribe(val => {
-                
-                this.nextTurn();
-
-            });
-
-        } else if ( this.countSource ) {
-
-            this.countSource.unsubscribe();
-            
+    removeComponent(index: number) {
+        if (!this.container) return;
+        let componentRef = null;
+        let indexFor = null;
+        for (let i = 0; i < this.components.length; i++) {
+            if (this.components[i].instance.key == index) {
+                componentRef = this.components[i];
+                indexFor = i;
+            }
         }
 
-
+        if (componentRef && indexFor !== null) {
+            console.log('hola');
+            
+            componentRef.destroy();
+            this.components.splice(indexFor, 1);
+            
+        }
     }
-
-    changeVel() {
-        
-        this.countSource?.unsubscribe();
-        this.count$ = interval(Number(this.velocidad));
-        this.countSource = this.count$.subscribe(val => {
-            this.nextTurn();
-        });
-    }
-
-    changeCuadricula() {
-        this.displayCuadricula = !this.displayCuadricula;
-    }
-
 
 }
