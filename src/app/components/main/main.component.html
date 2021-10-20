@@ -2,41 +2,16 @@
 
     <p class="h1 text-center mb-4 text-uppercase">El juego de la vida</p>
 
-    <div class="panel">
-        <div *ngFor="let fila of panel; let i = index" class="fila">
-            <app-celda *ngFor="let columna of fila; let j = index" [valorCelda]="columna" (click)="cambiarEstado(i, j)" class="celda" [ngClass]="{'conBorde': displayCuadricula}">&nbsp;</app-celda>
-
-        </div>
-
+    <div *ngIf="components.length === 0" class="alert alert-success marginTop" role="alert">
+        <h4 class="alert-heading">No tienes ninguna partida</h4>
+        <p>Pulsa en el botón inferior para crear una nueva.</p>
     </div>
 
-    <div class="botonera">
-        <button (click)="nextTurn()" class="btn btn-primary">Siguiente turno</button>
-        <button (click)="runGame()" class="btn btn-info">{{ play ? 'Stop' : 'Play' }}</button>
-        <button (click)="changeCuadricula()" class="btn btn-secondary">Cuadrícula <i class="bi bi-box"></i>&nbsp;
-            <i *ngIf="displayCuadricula" class="bi bi-check-circle-fill"></i>
-            <i *ngIf="!displayCuadricula" class="bi bi-check-circle"></i>
-        </button>
+    <div class="boxAddPartida">
+        <button (click)="addComponent()" class="btn btn-secondary addPartida"><i class="bi bi-plus-lg plusIcon"></i></button>
     </div>
-    <div class="form-group">
-        <legend class="mt-4">Velocidad</legend>
-        <div class="form-check">
-            <label class="form-check-label">
-            <input type="radio" checked="true" class="form-check-input" name="velocidad" value="600" [(ngModel)]="velocidad" (change)="changeVel()">
-            Rápido
-          </label>
-        </div>
-        <div class="form-check">
-            <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="velocidad" value="1000" [(ngModel)]="velocidad" (change)="changeVel()">
-            Normal
-          </label>
-        </div>
-        <div class="form-check disabled">
-            <label class="form-check-label">
-            <input type="radio" class="form-check-input" name="velocidad" value="1500" [(ngModel)]="velocidad" (change)="changeVel()">
-            Lento
-          </label>
-        </div>
-    </div>
+    
+    <ng-template #container>
+    </ng-template>
+    
 </div>

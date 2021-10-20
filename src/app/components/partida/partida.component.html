@@ -1,0 +1,45 @@
+<div *ngIf="panel">
+    <div class="panel">
+        <div *ngFor="let fila of panel.panel; let i = index" class="fila">
+            <app-celda *ngFor="let columna of fila; let j = index" [valorCelda]="columna" (click)="cambiarEstado(i, j)" class="celda" [ngClass]="{'conBorde': displayCuadricula}">&nbsp;</app-celda>
+    
+        </div>
+    
+    </div>
+    
+    <div class="mt-2">
+        <p class="text-end">Generación: {{panel.generacion}}</p>
+    </div>
+    
+    <div class="botonera marginBottom">
+        <button (click)="nextTurn()" class="btn btn-primary">Siguiente turno</button>
+        <button (click)="runGame()" class="btn btn-info">{{ play ? 'Stop' : 'Play' }}</button>
+        <button (click)="changeCuadricula()" class="btn btn-secondary">Cuadrícula <i class="bi bi-box"></i>&nbsp;
+            <i *ngIf="displayCuadricula" class="bi bi-check-circle-fill"></i>
+            <i *ngIf="!displayCuadricula" class="bi bi-check-circle"></i>
+        </button>
+        <button (click)="borrarComponente()" class="btn btn-danger">Borrar partida <i class="bi bi-trash"></i></button>
+    </div>
+     
+    <!--<div class="form-group mb-4">
+        <legend class="mt-4">Velocidad</legend>
+        <div class="form-check">
+            <label class="form-check-label">
+            <input type="radio" checked="true" class="form-check-input" name="velocidad" value="600" [(ngModel)]="velocidad" (change)="changeVel()">
+            Rápido
+          </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="velocidad" value="1000" [(ngModel)]="velocidad" (change)="changeVel()">
+            Normal
+          </label>
+        </div>
+        <div class="form-check disabled">
+            <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="velocidad" value="1500" [(ngModel)]="velocidad" (change)="changeVel()">
+            Lento
+          </label>
+        </div>
+    </div> -->
+</div>

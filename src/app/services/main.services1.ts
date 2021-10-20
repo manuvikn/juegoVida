@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 @Injectable({
     providedIn: 'root'
 })
-export class MainService {
+export class MainService1 {
 
     panel: Array<Array<number>> = [];
     panelAux: Array<Array<number>> = [];
